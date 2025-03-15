@@ -1,0 +1,191 @@
+{
+  "info": {
+    "name": "MCP Filesystem API",
+    "description": "A collection for testing the Model Context Protocol Filesystem API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get Server Info",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:3000/mcp-info",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["mcp-info"]
+        },
+        "description": "Get MCP server metadata"
+      }
+    },
+    {
+      "name": "Get Files Resource",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "http://localhost:3000/mcp-rpc",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["mcp-rpc"]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"resources.get\",\n  \"params\": {\n    \"resource\": \"files\"\n  }\n}"
+        },
+        "description": "Get the files resource from the MCP server"
+      }
+    },
+    {
+      "name": "Get Files Resource with Path",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "http://localhost:3000/mcp-rpc",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["mcp-rpc"]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"resources.get\",\n  \"params\": {\n    \"resource\": \"files\",\n    \"path\": \".\"\n  }\n}"
+        },
+        "description": "Get the files resource from a specific path"
+      }
+    },
+    {
+      "name": "List Directory",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "http://localhost:3000/mcp-rpc",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["mcp-rpc"]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 2,\n  \"method\": \"tools.execute\",\n  \"params\": {\n    \"tool\": \"list-directory\",\n    \"args\": {\n      \"path\": \".\"\n    }\n  }\n}"
+        },
+        "description": "List files in a directory"
+      }
+    },
+    {
+      "name": "Read File",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "http://localhost:3000/mcp-rpc",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["mcp-rpc"]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 3,\n  \"method\": \"tools.execute\",\n  \"params\": {\n    \"tool\": \"read-file\",\n    \"args\": {\n      \"path\": \"./README.md\"\n    }\n  }\n}"
+        },
+        "description": "Read the contents of a file"
+      }
+    },
+    {
+      "name": "Write File",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "http://localhost:3000/mcp-rpc",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["mcp-rpc"]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 4,\n  \"method\": \"tools.execute\",\n  \"params\": {\n    \"tool\": \"write-file\",\n    \"args\": {\n      \"path\": \"./test-output.txt\",\n      \"content\": \"This file was created via the MCP protocol!\"\n    }\n  }\n}"
+        },
+        "description": "Write content to a file"
+      }
+    },
+    {
+      "name": "Search Files",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "http://localhost:3000/mcp-rpc",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["mcp-rpc"]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 5,\n  \"method\": \"tools.execute\",\n  \"params\": {\n    \"tool\": \"search-files\",\n    \"args\": {\n      \"directory\": \".\",\n      \"pattern\": \"*.json\"\n    }\n  }\n}"
+        },
+        "description": "Search for files matching a pattern"
+      }
+    },
+    {
+      "name": "Render File Operations Prompt",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "http://localhost:3000/mcp-rpc",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["mcp-rpc"]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 6,\n  \"method\": \"prompts.render\",\n  \"params\": {\n    \"prompt\": \"file-operations\",\n    \"args\": {\n      \"operation\": \"read\",\n      \"path\": \"./README.md\"\n    }\n  }\n}"
+        },
+        "description": "Render a file operations prompt"
+      }
+    }
+  ]
+} 
