@@ -59,5 +59,14 @@ export interface WriteFileResponse extends ToolResponse {
   };
 }
 
+export interface SearchFilesResponse extends ToolResponse {
+  matches?: FileResource[];
+}
+
+// Prompt response types
+export interface PromptResponse extends ToolResponse {
+  prompt?: string;
+}
+
 // Express handler with typed request/response
 export type MCPRequestHandler = (req: Request, res: Response) => void | Promise<void>; 
