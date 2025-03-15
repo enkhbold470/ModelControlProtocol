@@ -68,6 +68,30 @@
       }
     },
     {
+      "name": "Get MCP Data Resource",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "http://localhost:3000/mcp-rpc",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["mcp-rpc"]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 7,\n  \"method\": \"resources.get\",\n  \"params\": {\n    \"resource\": \"mcp-data\"\n  }\n}"
+        },
+        "description": "Get the MCP data resource"
+      }
+    },
+    {
       "name": "List Directory",
       "request": {
         "method": "POST",
@@ -185,6 +209,78 @@
           "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 6,\n  \"method\": \"prompts.render\",\n  \"params\": {\n    \"prompt\": \"file-operations\",\n    \"args\": {\n      \"operation\": \"read\",\n      \"path\": \"./README.md\"\n    }\n  }\n}"
         },
         "description": "Render a file operations prompt"
+      }
+    },
+    {
+      "name": "List MCP Data Folder",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "http://localhost:3000/mcp-rpc",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["mcp-rpc"]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 8,\n  \"method\": \"tools.execute\",\n  \"params\": {\n    \"tool\": \"mcp-data-list\",\n    \"args\": {}\n  }\n}"
+        },
+        "description": "List files in the MCP data folder"
+      }
+    },
+    {
+      "name": "Read MCP Data File",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "http://localhost:3000/mcp-rpc",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["mcp-rpc"]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 9,\n  \"method\": \"tools.execute\",\n  \"params\": {\n    \"tool\": \"mcp-data-read\",\n    \"args\": {\n      \"filename\": \"example-data.json\"\n    }\n  }\n}"
+        },
+        "description": "Read a file from the MCP data folder"
+      }
+    },
+    {
+      "name": "Write MCP Data File",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "http://localhost:3000/mcp-rpc",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["mcp-rpc"]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 10,\n  \"method\": \"tools.execute\",\n  \"params\": {\n    \"tool\": \"mcp-data-write\",\n    \"args\": {\n      \"filename\": \"test-data.json\",\n      \"content\": \"{\\n  \\\"name\\\": \\\"Test Data\\\",\\n  \\\"description\\\": \\\"This is a test data file\\\",\\n  \\\"timestamp\\\": \\\"2024-03-15T21:00:00Z\\\",\\n  \\\"values\\\": [10, 20, 30, 40, 50]\\n}\"\n    }\n  }\n}"
+        },
+        "description": "Write content to a file in the MCP data folder"
       }
     }
   ]

@@ -10,8 +10,12 @@ The Model Context Protocol (MCP) is an open standard developed by Anthropic that
 
 This demo implements a simple MCP server with:
 
-- **Resources**: File system metadata access
-- **Tools**: Directory listing, file reading, file writing, and file searching operations
+- **Resources**:
+  - File system metadata access
+  - Dedicated MCP data folder access
+- **Tools**:
+  - Directory listing, file reading, file writing, and file searching operations
+  - MCP data folder specific operations
 - **Prompts**: Template-based prompts for file operations
 
 ## Components of MCP
@@ -65,6 +69,7 @@ This will:
 4. Read the contents of the test file
 5. Search for files matching a pattern
 6. Render a file operations prompt
+7. Perform operations on the dedicated MCP data folder
 
 ### Testing with Postman
 
@@ -72,18 +77,34 @@ A Postman collection is included (`mcp-postman-collection.json`) that you can im
 
 1. Import the collection in Postman
 2. Make sure the server is running
-3. Try the different requests:
+3. Try the different requests, including:
    - Get Server Info
-   - Get Files Resource
-   - List Directory
-   - Read File
-   - Write File
+   - Get Files Resource / MCP Data Resource
+   - List Directory / MCP Data Folder
+   - Read/Write File operations
+   - MCP data folder operations
 
 ## Project Structure
 
 - `src/index.ts` - MCP server implementation
 - `src/client.ts` - Sample client demonstrating how to use the MCP server
+- `src/types.ts` - TypeScript type definitions for the MCP implementation
 - `mcp-postman-collection.json` - Postman collection for API testing
+- `mcp-data/` - Dedicated folder for MCP data files
+
+## Dedicated MCP Data Folder
+
+The server includes a dedicated `mcp-data` folder for storing files that are specifically managed by the MCP server. This provides several advantages:
+
+1. **Isolation**: Keeps MCP-managed files separate from other project files
+2. **Security**: Provides path traversal protection to prevent accessing files outside the MCP data folder
+3. **Simplicity**: Offers simpler API endpoints specifically for the MCP data folder
+4. **Organization**: Makes it easy to organize and locate MCP-related data files
+
+To work with the MCP data folder:
+
+- Use the `mcp-data` resource to get information about available files
+- Use the `mcp-data-list`, `mcp-data-read`, and `mcp-data-write` tools to interact with files
 
 ## MCP Protocol Details
 
@@ -113,7 +134,7 @@ This demo is for educational purposes only and includes minimal security measure
 
 - Authentication and authorization
 - Input validation
-- Path traversal protection
+- Path traversal protection (already included for the MCP data folder)
 - Rate limiting
 - Logging and audit trails
 
